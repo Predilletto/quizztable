@@ -1,0 +1,48 @@
+.qst-wrapper {
+  width: 100%;
+  flex: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.qst-wrapper > input {
+  box-shadow: 10px 10px 8px #468158;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #1a1c2c;
+  background-color: #94b0c2;
+  flex: 1;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  transition: border-color 0.3s ease-in-out;
+  min-height: 0.8rem;
+  max-height: 0.8rem;
+  width: 70%;
+}
+
+.qst-wrapper > input:focus {
+  outline: none;
+  border-color: blue;
+}
+
+.qst-wrapper > button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-width: 150px;
+  min-height: 40px;
+  color: #f8f2e1;
+  width: auto;
+  cursor: pointer;
+  background-color: #454857;
+
+  border-radius: 5px;
+  box-shadow: 10px 10px 8px #468158;
+}
+
+.qst-wrapper > button:hover {
+  background-image: linear-gradient(180deg, #95d891, #74bbad);
+}

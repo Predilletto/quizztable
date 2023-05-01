@@ -1,0 +1,108 @@
+.mtch-wrapper {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  box-shadow: 10px 10px 8px #888888;
+  padding: 0;
+  flex-grow: 8;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--container2);
+  align-items: center;
+  border-radius: 15px;
+}
+
+.mtch-wrapper > h1 {
+  max-width: 90%;
+  font-family: "8BIT WONDER", sans-serif;
+  color: var(--container);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+.mtch-wrapper > ul {
+  width: 100%;
+  flex: 8;
+  padding-left: 0;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mtc-li {
+  cursor: pointer;
+  border: 3px solid #1a1c2c;
+  max-height: 12%;
+  width: 90%;
+  margin: 5px 5px;
+  color: #1a1c2c;
+  border-radius: 12px;
+  display: flex;
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  background-color: #566c86;
+}
+.sbj-li {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 5px;
+  text-align: left;
+  flex: 8;
+}
+
+.sbj-opts-wrapper {
+  height: 80%;
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lvl-li {
+  flex: 3;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  text-align: center;
+  border-radius: 2px;
+  padding: 4px 8px;
+  background: #454857;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  transition: all 100ms linear;
+}
+
+.edit-btn {
+  cursor: pointer;
+  flex: 1;
+}
+
+.remove-btn {
+  cursor: pointer;
+  flex: 1;
+  margin-left: 5px;
+  background-color: #b13e53;
+  margin-right: 5px;
+}
+
+.Dificíl {
+  background-image: linear-gradient(120deg, #b13e53, #b13e53);
+}
+
+.Médio {
+  background-image: linear-gradient(120deg, #3b5dc9, #3b5dc9);
+}
+
+.Fácil {
+  background-image: linear-gradient(130deg, #95d891, #74bbad);
+}

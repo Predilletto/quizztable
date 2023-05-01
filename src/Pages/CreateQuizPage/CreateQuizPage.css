@@ -1,0 +1,13 @@
+.quizpage-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+}
+
+.crt-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 8;
+  justify-content: center;
+}

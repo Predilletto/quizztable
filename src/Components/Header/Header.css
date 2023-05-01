@@ -1,0 +1,20 @@
+.header-app {
+  font-family: "8BIT WONDER", sans-serif;
+  background-color: #a7d074;
+  border-bottom: 6px solid #404b4f;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #f8f2e1;
+  -webkit-text-stroke: 3px #404b4f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  flex: 1;
+}
+
+.header-app > h1 {
+  cursor: pointer;
+}
