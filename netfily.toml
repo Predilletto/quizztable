@@ -1,0 +1,14 @@
+[[redirects]]
+  from = "/create-quiz"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/list-quiz"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

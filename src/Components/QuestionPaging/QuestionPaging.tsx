@@ -14,7 +14,7 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
     if (questions.length > 0) {
       setQuestion(questions[0]);
     }
-  }, []);
+  }, [questions]);
 
   useEffect(() => {
     if (changeQuestion < questions.length) {

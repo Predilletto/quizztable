@@ -19,7 +19,7 @@ export default function PlayMatch() {
     if (retrievedQuiz) {
       setQuiz(retrievedQuiz);
     }
-  });
+  }, []);
 
   return (
     <div>
