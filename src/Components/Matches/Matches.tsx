@@ -13,13 +13,14 @@ export default function Matches() {
     localStorage.removeItem("Quiz" + key);
   }
 
-  async function teste() {
+  async function getQuizList() {
     const quizzes = await getQuizzes();
+    console.log(quizzes);
     setQuizzes(quizzes as Array<QuizProps>);
   }
 
   useEffect(() => {
-    teste();
+    getQuizList();
   }, []);
 
   return (
@@ -27,12 +28,13 @@ export default function Matches() {
       <h1>Quiz disponiveis</h1>
       <ul>
         {quizzes.map((quiz, index) => (
-          <li
-            onClick={() => navigate(`/match/${quiz.subject}`)}
-            className="mtc-li"
-            key={index}
-          >
-            <div className="sbj-li">{quiz.subject} </div>
+          <li className="mtc-li" key={index}>
+            <div
+              onClick={() => navigate(`/match/${quiz.id}`)}
+              className="sbj-li"
+            >
+              {quiz.subject}{" "}
+            </div>
             <div className="sbj-opts-wrapper">
               <div className={`lvl-li ${quiz.level}`}>{quiz.level}</div>
               <button className="edit-btn">

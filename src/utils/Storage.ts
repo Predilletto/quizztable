@@ -1,6 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { DocumentData, getFirestore } from "firebase/firestore";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  DocumentData,
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { QuizProps } from "../Components/Quiz/Quiz";
 
 const firebaseConfig = {
@@ -19,7 +27,8 @@ const db = getFirestore(app);
 async function addQuiz(quiz: QuizProps) {
   try {
     const docRef = await addDoc(collection(db, "Quizzes"), quiz);
-    console.log("Document written with ID: ", docRef.id);
+    await updateDoc(doc(db, "Quizzes", docRef.id), { id: docRef.id });
+    alert("Document written with ID: " + docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
@@ -32,4 +41,21 @@ async function getQuizzes() {
   return quizzes;
 }
 
-export { addQuiz, getQuizzes };
+async function retrieveQuiz(id: string) {
+  const docRef = doc(db, "Quizzes", id);
+  let quiz: QuizProps | null = null;
+
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      quiz = docSnap.data() as QuizProps;
+      return quiz;
+    } else {
+      alert("Document does not exist");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { addQuiz, getQuizzes, retrieveQuiz };

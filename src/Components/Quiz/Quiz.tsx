@@ -8,6 +8,7 @@ export enum Level {
 }
 
 export type QuizProps = {
+  id?: string;
   subject: string;
   level: Level;
   questions: Array<QuestionProps>;

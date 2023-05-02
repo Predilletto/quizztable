@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { QuestionProps } from "../Question";
 import { OptionProps } from "../Option";
 
+import "./QuestionPaging.css";
+import { useNavigate } from "react-router-dom";
+
 interface QuestionPagingProps {
   questions: Array<QuestionProps>;
 }
@@ -9,6 +12,9 @@ interface QuestionPagingProps {
 export default function QuestionPaging({ questions }: QuestionPagingProps) {
   const [changeQuestion, setChangeQuestion] = useState(0);
   const [question, setQuestion] = useState<QuestionProps | null>(null);
+  const [active, setActive] = useState("disabled");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (questions.length > 0) {
@@ -19,6 +25,9 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
   useEffect(() => {
     if (changeQuestion < questions.length) {
       setQuestion(questions[changeQuestion]);
+    } else if (questions.length > 0 && changeQuestion === questions.length) {
+      alert("it ended");
+      navigate("/");
     }
   }, [changeQuestion, questions]);
 
@@ -28,20 +37,39 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
   }
 
   function isCorrect(option: OptionProps) {
-    if (option.correct && questions.length > changeQuestion) {
-      alert("correct");
-      nextQuestion();
+    if (questions.length > changeQuestion) {
+      if (option.correct) {
+        setActive("active");
+        setTimeout(() => {
+          setActive("disabled");
+          alert("correct :D");
+          nextQuestion();
+        }, 500);
+      } else {
+        setActive("active");
+        setTimeout(() => {
+          setActive("disabled");
+          alert("failed :D");
+          nextQuestion();
+        }, 500);
+      }
     }
   }
 
   return (
-    <div>
+    <div className="question-wrapper">
       {question ? (
         <>
           <h2>{question.title}</h2>
-          <ul>
+          <ul className="selector-wrapper">
             {question.options.map((option, index) => (
-              <li onClick={() => isCorrect(option)} key={index}>
+              <li
+                className={`selection ${
+                  option.correct ? "correct-opt" : "incorrect-opt"
+                } ${active}`}
+                onClick={() => isCorrect(option)}
+                key={index}
+              >
                 {option.text}
               </li>
             ))}

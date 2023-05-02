@@ -3,19 +3,21 @@ import { Level, QuizProps } from "../Quiz/Quiz";
 import CreateQuestion from "../CreateQuestion/CreateQuestion";
 import { QuestionProps } from "../Question";
 import { OptionProps } from "../Option";
+import { addQuiz } from "../../utils/Storage";
+import { useNavigate } from "react-router-dom";
 
 import "./CreateQuiz.css";
-import { addQuiz } from "../../utils/Storage";
 
 export default function CreateQuiz() {
+  const navigate = useNavigate();
   const [subject, setSubject] = useState("");
   const [level, setLevel] = useState<Level>(Level.FACIL);
   const [questions, setQuestions] = useState<QuestionProps[]>([]);
 
-  function createQuiz(): void {
+  async function createQuiz() {
     const quiz: QuizProps = { subject, level, questions };
-    addQuiz(quiz);
-    localStorage.setItem(`Quiz${quiz.subject}`, JSON.stringify(quiz));
+    await addQuiz(quiz);
+    navigate("/list-quiz");
   }
 
   function addQuestion(title: string, options: Array<OptionProps>) {
