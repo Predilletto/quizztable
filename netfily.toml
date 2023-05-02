@@ -1,3 +1,6 @@
+[build]
+  base = "build"
+
 [[redirects]]
   from = "/create-quiz"
   to = "/"
