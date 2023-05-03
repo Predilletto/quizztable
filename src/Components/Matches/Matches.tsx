@@ -3,14 +3,16 @@ import Quiz, { QuizProps } from "../Quiz/Quiz";
 
 import "./Matches.css";
 import { useNavigate } from "react-router-dom";
-import { getQuizzes } from "../../utils/Storage";
+import { getQuizzes, removeQuiz } from "../../utils/Storage";
 
 export default function Matches() {
   const [quizzes, setQuizzes] = useState<QuizProps[]>([]);
   const navigate = useNavigate();
 
-  function removeQuiz(key: string) {
-    localStorage.removeItem("Quiz" + key);
+  async function deleteQuiz(id: string | undefined) {
+    await removeQuiz(id);
+    const filteredQuizzes = quizzes.filter((quiz) => quiz.id !== id);
+    setQuizzes(filteredQuizzes);
   }
 
   async function getQuizList() {
@@ -47,7 +49,7 @@ export default function Matches() {
               </button>
               <button
                 className="remove-btn"
-                onClick={() => removeQuiz(quiz.subject)}
+                onClick={() => deleteQuiz(quiz.id)}
               >
                 {" "}
                 X{" "}

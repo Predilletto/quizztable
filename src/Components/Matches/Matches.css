@@ -13,7 +13,6 @@
 }
 
 .mtch-wrapper > h1 {
-  max-width: 90%;
   font-family: "8BIT WONDER", sans-serif;
   color: var(--container);
   display: flex;
@@ -95,7 +94,7 @@
   margin-right: 5px;
 }
 
-.Dificíl {
+.Difícil {
   background-image: linear-gradient(120deg, #b13e53, #b13e53);
 }
 

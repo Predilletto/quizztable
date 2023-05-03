@@ -8,6 +8,7 @@ import {
   getDoc,
   doc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { QuizProps } from "../Components/Quiz/Quiz";
 
@@ -58,4 +59,19 @@ async function retrieveQuiz(id: string) {
   }
 }
 
-export { addQuiz, getQuizzes, retrieveQuiz };
+async function removeQuiz(id: string | undefined) {
+  if (id) {
+    const docRef = doc(db, "Quizzes", id);
+    deleteDoc(docRef)
+      .then(() => {
+        alert("Entire Document has been deleted successfully.");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    alert("document not found");
+  }
+}
+
+export { addQuiz, getQuizzes, retrieveQuiz, removeQuiz };
