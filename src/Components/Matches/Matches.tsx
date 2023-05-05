@@ -41,7 +41,12 @@ export default function Matches() {
       <ul>
         {userList.length > 0
           ? userList.map((quiz, index) => (
-              <Quiz quiz={quiz} deleteQuiz={deleteQuiz} key={index} />
+              <Quiz
+                quiz={quiz}
+                deleteQuiz={deleteQuiz}
+                key={index}
+                auth={true}
+              />
             ))
           : "Nenhum Quiz criado ainda :( "}
       </ul>
@@ -49,7 +54,7 @@ export default function Matches() {
       <h1>Quiz disponiveis</h1>
       <ul>
         {quizzes.map((quiz, index) => (
-          <Quiz quiz={quiz} deleteQuiz={deleteQuiz} key={index} />
+          <Quiz quiz={quiz} deleteQuiz={deleteQuiz} key={index} auth={false} />
         ))}
       </ul>
     </div>

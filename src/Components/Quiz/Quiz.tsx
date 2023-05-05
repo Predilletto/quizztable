@@ -19,11 +19,12 @@ export type QuizProps = {
 };
 
 type Props = {
+  auth: boolean;
   quiz: QuizProps;
   deleteQuiz: DeleteQuizFunc;
 };
 
-function Quiz({ quiz, deleteQuiz }: Props) {
+function Quiz({ quiz, deleteQuiz, auth }: Props) {
   const navigate = useNavigate();
 
   return (
@@ -31,21 +32,25 @@ function Quiz({ quiz, deleteQuiz }: Props) {
       <div onClick={() => navigate(`/match/${quiz.id}`)} className="sbj-li">
         {quiz.subject}{" "}
       </div>
-      <div className="sbj-opts-wrapper">
-        <div className={`lvl-li ${quiz.level}`}>{quiz.level}</div>
-        <button className="edit-btn">
-          {" "}
-          <img
-            src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-32.png"
-            width={18}
-            height={18}
-          />{" "}
-        </button>
-        <button className="remove-btn" onClick={() => deleteQuiz(quiz.id)}>
-          {" "}
-          X{" "}
-        </button>
-      </div>{" "}
+      {auth ? (
+        <div className="sbj-opts-wrapper">
+          <div className={`lvl-li ${quiz.level}`}>{quiz.level}</div>
+          <button className="edit-btn">
+            {" "}
+            <img
+              src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-32.png"
+              width={18}
+              height={18}
+            />{" "}
+          </button>
+          <button className="remove-btn" onClick={() => deleteQuiz(quiz.id)}>
+            {" "}
+            X{" "}
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
     </li>
   );
 }
