@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { QuizProps } from "../Components/Quiz/Quiz";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyBT0C_3C6J8VmeIJOyb0s8-8crD0wIWWYY",
   authDomain: "quiz-12108.firebaseapp.com",
   projectId: "quiz-12108",

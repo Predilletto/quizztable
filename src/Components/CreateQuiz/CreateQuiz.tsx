@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Level, QuizProps } from "../Quiz/Quiz";
 import CreateQuestion from "../CreateQuestion/CreateQuestion";
 import { QuestionProps } from "../Question";
@@ -7,15 +7,22 @@ import { addQuiz } from "../../utils/Storage";
 import { useNavigate } from "react-router-dom";
 
 import "./CreateQuiz.css";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 export default function CreateQuiz() {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [subject, setSubject] = useState("");
   const [level, setLevel] = useState<Level>(Level.FACIL);
   const [questions, setQuestions] = useState<QuestionProps[]>([]);
 
   async function createQuiz() {
-    const quiz: QuizProps = { subject, level, questions };
+    const quiz: QuizProps = {
+      subject,
+      level,
+      questions,
+      creatorUID: user?.uid,
+    };
     await addQuiz(quiz);
     navigate("/list-quiz");
   }

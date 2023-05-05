@@ -13,6 +13,7 @@ export default function PlayMatch() {
     subject: "",
     level: Level.FACIL,
     questions: [],
+    creatorUID: "",
   });
 
   async function getQuiz() {

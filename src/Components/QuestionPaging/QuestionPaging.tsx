@@ -27,7 +27,7 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
       setQuestion(questions[changeQuestion]);
     } else if (questions.length > 0 && changeQuestion === questions.length) {
       alert("it ended");
-      navigate("/");
+      navigate("/home");
     }
   }, [changeQuestion, questions]);
 

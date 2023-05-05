@@ -9,12 +9,20 @@
   color: #f8f2e1;
   -webkit-text-stroke: 3px #404b4f;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   min-height: 50px;
   flex: 1;
 }
 
+.login-icon {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
 .header-app > h1 {
+  padding-left: 50px;
+  flex: 1 1 auto;
+  text-align: center;
   cursor: pointer;
 }
