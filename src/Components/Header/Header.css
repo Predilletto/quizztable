@@ -1,13 +1,13 @@
 .header-app {
-  font-family: "8BIT WONDER", sans-serif;
+  font-family: "Press Start 2P", cursive;
   background-color: #a7d074;
   border-bottom: 6px solid #404b4f;
   padding: 1rem;
   margin-bottom: 1rem;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #f8f2e1;
-  -webkit-text-stroke: 3px #404b4f;
+  color: #ebede9;
+  -webkit-text-stroke: 2.5px #394a50;
   display: flex;
   justify-content: space-between;
   align-items: center;

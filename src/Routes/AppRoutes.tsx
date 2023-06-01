@@ -5,6 +5,7 @@ import CreateQuizPage from "../Pages/CreateQuizPage/CreateQuizPage";
 import ListQuizPage from "../Pages/List-Quiz/ListQuizPage";
 import PlayMatch from "../Pages/Play-Match/PlayMatch";
 import Login from "../Pages/Login/Login";
+import EditQuizPage from "../Pages/EditQuizPage/EditQuizPage";
 
 export function Approutes() {
   return (
@@ -15,6 +16,7 @@ export function Approutes() {
         <Route path="/create-quiz" element={<CreateQuizPage />} />
         <Route path="/list-quiz" element={<ListQuizPage />} />
         <Route path="/match/:id" element={<PlayMatch />} />
+        <Route path="/edit/:id" element={<EditQuizPage />} />
       </Routes>
     </Router>
   );

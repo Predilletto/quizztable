@@ -1,6 +1,6 @@
 import React from "react";
 
-export type OptionProps = { text: string; correct: boolean };
+export type OptionProps = { text: string; correct: boolean; idx: number };
 function Option(option: OptionProps) {
   return (
     <div className="opcao">

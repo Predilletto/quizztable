@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { QuestionProps } from "../Question";
+import { QuestionProps } from "../Question/Question";
 import { OptionProps } from "../Option";
 
 import "./QuestionPaging.css";

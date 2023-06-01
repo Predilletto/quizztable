@@ -5,20 +5,36 @@ import "./Matches.css";
 import { useNavigate } from "react-router-dom";
 import { getQuizzes, removeQuiz } from "../../utils/Storage";
 import { AuthContext } from "../../Contexts/AuthContext";
+import EditQuiz from "../EditQuiz/EditQuiz";
+import DialogBox from "../DialogBox/DialogBox";
 
 export type DeleteQuizFunc = (id: string | undefined) => void;
+export type EditQuizFunc = (id: string | undefined) => void;
 
 export default function Matches() {
   const { user } = useContext(AuthContext);
 
   const [userList, setUserList] = useState<QuizProps[]>([]);
   const [quizzes, setQuizzes] = useState<QuizProps[]>([]);
-  const navigate = useNavigate();
+  const [remove, setRemove] = useState(false);
+  const [rmvId, setRmvId] = useState<string | undefined>("");
+  const [showDialog, setShowDialog] = useState(false);
 
-  async function deleteQuiz(id: string | undefined) {
-    await removeQuiz(id);
-    const filteredQuizzes = quizzes.filter((quiz) => quiz.id !== id);
-    setQuizzes(filteredQuizzes);
+  function deleteQuiz(id: string | undefined) {
+    setShowDialog(true);
+    setRmvId(id);
+  }
+
+  async function onRemove() {
+    await removeQuiz(rmvId);
+    const filteredQuizzes = userList.filter((quiz) => quiz.id !== rmvId);
+    setUserList(filteredQuizzes);
+    closeDialog();
+  }
+
+  function closeDialog() {
+    setShowDialog(false);
+    setRmvId("");
   }
 
   async function getQuizList() {
@@ -44,8 +60,9 @@ export default function Matches() {
               <Quiz
                 quiz={quiz}
                 deleteQuiz={deleteQuiz}
+                editQuiz={EditQuiz}
                 key={index}
-                auth={true}
+                auth={user?.uid === quiz.creatorUID}
               />
             ))
           : "Nenhum Quiz criado ainda :( "}
@@ -54,9 +71,20 @@ export default function Matches() {
       <h1>Quiz disponiveis</h1>
       <ul>
         {quizzes.map((quiz, index) => (
-          <Quiz quiz={quiz} deleteQuiz={deleteQuiz} key={index} auth={false} />
+          <Quiz
+            quiz={quiz}
+            deleteQuiz={deleteQuiz}
+            editQuiz={EditQuiz}
+            key={index}
+            auth={false}
+          />
         ))}
       </ul>
+      <DialogBox
+        isOpen={showDialog}
+        onClose={closeDialog}
+        onRemove={onRemove}
+      />
     </div>
   );
 }

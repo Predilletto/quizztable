@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { OptionProps } from "../Option";
 import CreateOption from "../CreateOption/CreateOption";
-import Question from "../Question/Question";
-import "./CreateQuestion.css";
+import Question, { QuestionProps } from "../Question/Question";
+import "../CreateQuestion/CreateQuestion.css";
 
 interface Props {
-  addQuestion: (title: string, options: Array<OptionProps>) => void;
+  question: QuestionProps;
+  saveQuestion: (
+    title: string,
+    options: Array<OptionProps>,
+    idx: number
+  ) => void;
 }
-function CreateQuestion(props: Props) {
-  const [title, setTitle] = useState("");
-  const [options, setOptions] = useState<OptionProps[]>([]);
-  const [unique, setUnique] = useState(false);
+
+export default function EditQuestion(props: Props) {
+  const [idx, setIdx] = useState(props.question.idx);
+  const [title, setTitle] = useState(props.question.title);
+  const [options, setOptions] = useState<OptionProps[]>(props.question.options);
+  const [unique, setUnique] = useState(true);
 
   function addOption(text: string, correct: boolean) {
     if (options.length > 4) {
@@ -49,14 +56,14 @@ function CreateQuestion(props: Props) {
     setOptions(updatedOptions);
   }
 
-  function handleCreate(title: string, options: Array<OptionProps>) {
+  function handleEdit(title: string, options: Array<OptionProps>, idx: number) {
     if (title.length < 6) {
       alert("A pergunta precisa ter pelo menos 6 caracteres");
       return;
     }
 
     if (unique) {
-      props.addQuestion(title, options);
+      props.saveQuestion(title, options, idx);
       setTitle("");
       setOptions([]);
       setUnique(false);
@@ -77,12 +84,10 @@ function CreateQuestion(props: Props) {
         deleteOption={deleteOption}
       />
 
-      <button onClick={() => handleCreate(title, options)}>
+      <button onClick={() => handleEdit(title, options, idx)}>
         {" "}
-        Create Question{" "}
+        Edit Question{" "}
       </button>
     </div>
   );
 }
-
-export default CreateQuestion;

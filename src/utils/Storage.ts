@@ -38,7 +38,11 @@ async function addQuiz(quiz: QuizProps) {
 async function getQuizzes() {
   const quizzes: DocumentData[] = [];
   const querySnapshot = await getDocs(collection(db, "Quizzes"));
-  querySnapshot.forEach((v) => quizzes.push(v.data()));
+  querySnapshot.forEach((v) => {
+    const data = v.data();
+    data.id = v.id;
+    quizzes.push(data);
+  });
   return quizzes;
 }
 
@@ -74,4 +78,9 @@ async function removeQuiz(id: string | undefined) {
   }
 }
 
-export { addQuiz, getQuizzes, retrieveQuiz, removeQuiz };
+async function editQuiz(quiz: QuizProps) {
+  console.log(quiz);
+  if (quiz.id) updateDoc(doc(db, "Quizzes", quiz.id), quiz);
+}
+
+export { addQuiz, getQuizzes, retrieveQuiz, removeQuiz, editQuiz };

@@ -1,30 +1,46 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Level, QuizProps } from "../Quiz/Quiz";
 import CreateQuestion from "../CreateQuestion/CreateQuestion";
 import Question, { QuestionProps } from "../Question/Question";
 import { OptionProps } from "../Option";
-import { addQuiz } from "../../utils/Storage";
-import { useNavigate } from "react-router-dom";
-
-import "./CreateQuiz.css";
+import { addQuiz, editQuiz, retrieveQuiz } from "../../utils/Storage";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthContext";
 import EditQuestion from "../EditQuestion/EditQuestion";
 
-export default function CreateQuiz() {
+import "../CreateQuiz/CreateQuiz.css";
+
+export default function EditQuiz() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [subject, setSubject] = useState("");
   const [level, setLevel] = useState<Level>(Level.FACIL);
+  const [questions, setQuestions] = useState<QuestionProps[]>([]);
+  const [showCreate, setShowCreate] = useState("");
+  const { id } = useParams() as { id: string };
   const [editableQuestion, setEditableQuestion] = useState<QuestionProps>({
     idx: -1,
     title: "",
     options: [],
   });
-  const [questions, setQuestions] = useState<QuestionProps[]>([]);
-  const [showCreate, setShowCreate] = useState("");
-  const createQuestionRef = useRef<HTMLDivElement>(null);
+  const [quiz, setQuiz] = useState<QuizProps>({
+    subject: "",
+    level: Level.FACIL,
+    questions: [],
+    creatorUID: "",
+  });
 
-  async function createQuiz() {
+  async function getQuiz() {
+    const retrievedQuiz: QuizProps | undefined = await retrieveQuiz(id);
+    if (retrievedQuiz) {
+      setQuiz(retrievedQuiz);
+      setSubject(retrievedQuiz.subject);
+      setLevel(retrievedQuiz.level);
+      setQuestions(retrievedQuiz.questions);
+    }
+  }
+
+  async function saveQuiz() {
     if (questions.length < 1) {
       alert("Impossível criar um Quiz sem questões D: ");
       return;
@@ -32,23 +48,18 @@ export default function CreateQuiz() {
 
     if (subject.length > 5) {
       const quiz: QuizProps = {
+        id,
         subject,
         level,
         questions,
         creatorUID: user?.uid,
       };
-      await addQuiz(quiz);
+      await editQuiz(quiz);
+      alert("editado com sucesso!");
       navigate("/list-quiz");
     } else {
       alert("Crie um assunto de pelo 5 caracteres");
     }
-  }
-
-  function addQuestion(title: string, options: Array<OptionProps>) {
-    const idx = questions.length + 1;
-    const question: QuestionProps = { title, options, idx };
-    setQuestions((prevQuestions) => [...prevQuestions, question]);
-    setShowCreate("");
   }
 
   function handleEdit(idx: number) {
@@ -107,17 +118,29 @@ export default function CreateQuiz() {
     }
   }
 
+  function addQuestion(title: string, options: Array<OptionProps>) {
+    const idx = questions.length + 1;
+    const question: QuestionProps = { title, options, idx };
+    setQuestions((prevQuestions) => [...prevQuestions, question]);
+    setShowCreate("");
+  }
+
+  useEffect(() => {
+    getQuiz();
+  }, []);
+
   return (
     <div className="quiz-container">
-      <h1>CRIE SEU QUIZ!</h1>
+      <h1>EDIT SEU QUIZ</h1>
       <h2>Assunto: </h2>
       <input
         className="subject-input"
         type="text"
+        value={subject}
         placeholder="Sobre qual assunto vamos questionar?..."
         onChange={(e) => setSubject(e.target.value)}
       />
-      <h3>Nível:</h3>
+      <h3>Nivel:</h3>
       <div className="radio-wrapper">
         <label htmlFor="facil">
           <input
@@ -149,7 +172,6 @@ export default function CreateQuiz() {
           <span id="dificil">Dificil</span>
         </label>
       </div>
-      <h3> Questões </h3>
       <ul className="qst-ul">
         {questions.length < 1 && !showCreate ? (
           <li>
@@ -175,9 +197,8 @@ export default function CreateQuiz() {
       ) : null}
       {viewerComponent()}
 
-      <button className="btn-quiz" onClick={() => createQuiz()}>
-        {" "}
-        Create Quiz{" "}
+      <button className="btn-quiz" onClick={() => saveQuiz()}>
+        Edit Quiz
       </button>
     </div>
   );

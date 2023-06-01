@@ -3,6 +3,7 @@ import "./CreateOption.css";
 import { OptionProps } from "../Option";
 
 interface Props {
+  deleteOption: (idx: number) => void;
   addOption: (text: string, correct: boolean) => void;
   options: Array<OptionProps>;
 }
@@ -17,6 +18,10 @@ export default function CreateOption(props: Props) {
     setCorrect(false);
   }
 
+  function removeHandler(idx: number) {
+    props.deleteOption(idx);
+  }
+
   const checkStyle = correct ? "correct" : "";
 
   return (
@@ -28,17 +33,23 @@ export default function CreateOption(props: Props) {
             key={index}
             className={option.correct ? "opt-li correct" : "opt-li"}
           >
-            {option.text}
+            {option.idx} - {option.text}
+            <button onClick={() => removeHandler(option.idx)}> remove </button>
           </li>
         ))}
       </ul>
 
-      <input
-        type="text"
-        placeholder="Option Text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
+      <div className="opt-wrapper-ipt">
+        <input
+          type="text"
+          placeholder="Option Text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button id="add-opt" type="button" onClick={() => addHandler()}>
+          +
+        </button>
+      </div>
       <label className={`check-opt ${checkStyle}`}>
         <input
           className="check-ipt"
@@ -48,10 +59,6 @@ export default function CreateOption(props: Props) {
         />
         {correct ? "YAY !!!" : "Correta?"}
       </label>
-
-      <button type="button" onClick={() => addHandler()}>
-        Adicionar Opção
-      </button>
     </div>
   );
 }

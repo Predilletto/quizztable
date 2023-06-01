@@ -1,6 +1,6 @@
 import React from "react";
-import { QuestionProps as QuestionProps } from "../Question";
-import { DeleteQuizFunc } from "../Matches/Matches";
+import { QuestionProps as QuestionProps } from "../Question/Question";
+import { DeleteQuizFunc, EditQuizFunc } from "../Matches/Matches";
 import { useNavigate } from "react-router-dom";
 import "../Matches/Matches.css";
 
@@ -22,9 +22,10 @@ type Props = {
   auth: boolean;
   quiz: QuizProps;
   deleteQuiz: DeleteQuizFunc;
+  editQuiz: EditQuizFunc;
 };
 
-function Quiz({ quiz, deleteQuiz, auth }: Props) {
+function Quiz({ quiz, deleteQuiz, editQuiz, auth }: Props) {
   const navigate = useNavigate();
 
   return (
@@ -35,7 +36,10 @@ function Quiz({ quiz, deleteQuiz, auth }: Props) {
       {auth ? (
         <div className="sbj-opts-wrapper">
           <div className={`lvl-li ${quiz.level}`}>{quiz.level}</div>
-          <button className="edit-btn">
+          <button
+            onClick={() => navigate(`/edit/${quiz.id}`)}
+            className="edit-btn"
+          >
             {" "}
             <img
               src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-32.png"

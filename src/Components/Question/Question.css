@@ -1,0 +1,46 @@
+.qst-li {
+  max-width: 35%;
+  min-width: 50%;
+  max-height: 35%;
+  cursor: pointer;
+  border: 2px solid #1a1c2c;
+  margin: 5px 5px;
+  color: #1a1c2c;
+  border-radius: 12px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  background-color: #566c86;
+}
+
+.qst-li > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 9;
+  font-size: 1rem;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-qst {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #f8f2e1;
+  width: auto;
+  cursor: pointer;
+  border: 2px solid rgb(128, 26, 26);
+  background-color: #454857;
+  border-radius: 100%;
+}
+
+.btn-qst:hover {
+  color: #1a1c2c;
+  background-color: #f8f2e1;
+}

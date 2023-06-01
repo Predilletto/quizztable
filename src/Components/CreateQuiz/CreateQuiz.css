@@ -16,7 +16,8 @@
 h2,
 h3,
 h4 {
-  font-family: "8BIT WONDER", sans-serif;
+  font-family: "Press Start 2P", cursive;
+  font-weight: bold;
   color: var(--container);
   display: flex;
   justify-content: center;
@@ -25,6 +26,8 @@ h4 {
 }
 
 .quiz-container > h1 {
+  word-spacing: -10px;
+  font-size: 2.5rem;
   -webkit-text-stroke: 3px #f8f2e1;
 }
 
@@ -110,6 +113,35 @@ h4 {
   min-height: 1.1rem;
   max-height: 1.1rem;
   width: 70%;
+}
+
+.btn-quiz-add {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 40px;
+  color: #f8f2e1;
+  width: auto;
+  cursor: pointer;
+  background-color: #454857;
+  border-radius: 5px;
+  box-shadow: 10px 10px 8px #468158;
+  max-width: 50px;
+  min-width: 50px;
+}
+
+.btn-quiz-add:hover {
+  background-image: linear-gradient(180deg, #95d891, #74bbad);
+}
+
+.qst-ul {
+  flex: 1;
+  width: 100%;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .subject-input:focus {
