@@ -1,10 +1,18 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Protected({ isAnon, children }: any) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAnon) {
+      alert("Precisa estar logado para acessar essa página");
+      navigate("/");
+    }
+  }, [isAnon]);
+
   if (isAnon) {
-    alert("Precisa estar logado para acessar essa pagina ");
-    return <Navigate to="/" replace />;
+    return null;
   }
   return children;
 }

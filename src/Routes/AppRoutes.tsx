@@ -22,8 +22,7 @@ export function Approutes() {
           path="/create-quiz"
           element={
             <Protected isAnon={user?.isAnonymous}>
-              {" "}
-              <CreateQuizPage />{" "}
+              {<CreateQuizPage />}
             </Protected>
           }
         />
