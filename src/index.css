@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 :root {
-  --container: #404b4f;
+  --lblue: #424c6e;
+  --text-white: #ffffff;
+  --dgreen: #00563f;
+  --dblue: #03193f;
+  --ngreen: #33984b;
+  --container: #0e071b;
   --container2: #38b764;
   --text: #ffdc86;
 }

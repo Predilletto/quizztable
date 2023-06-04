@@ -8,6 +8,6 @@
 .crt-wrapper {
   display: flex;
   flex-direction: column;
-  flex: 8;
+  flex: 9;
   justify-content: center;
 }

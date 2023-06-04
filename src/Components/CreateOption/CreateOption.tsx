@@ -34,7 +34,12 @@ export default function CreateOption(props: Props) {
             className={option.correct ? "opt-li correct" : "opt-li"}
           >
             {option.idx} - {option.text}
-            <button onClick={() => removeHandler(option.idx)}> remove </button>
+            <button
+              className="btn-li-opt"
+              onClick={() => removeHandler(option.idx)}
+            >
+              X
+            </button>
           </li>
         ))}
       </ul>

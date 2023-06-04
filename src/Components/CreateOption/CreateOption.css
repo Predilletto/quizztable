@@ -17,7 +17,7 @@
 }
 
 .opt-li {
-  list-style: circle;
+  text-indent: 5px;
   opacity: 70%;
   margin: 5px 5px;
   font-family: "8BIT WONDER", sans-serif;
@@ -29,8 +29,21 @@
   font-size: 1rem;
   text-align: center;
   align-items: center;
-  justify-content: center;
+  text-overflow: ellipsis;
+  justify-content: space-between;
   background-color: var(--container);
+}
+.btn-li-opt {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #f8f2e1;
+  width: auto;
+  cursor: pointer;
+  border: 2px solid rgb(128, 26, 26);
+  background-color: #454857;
+  border-radius: 100%;
 }
 
 .opt-wrapper-ipt {
@@ -44,7 +57,7 @@
 
 .opt-wrapper-ipt > input[type="text"] {
   justify-self: center;
-  box-shadow: 10px 10px 8px #468158;
+  box-shadow: 10px 10px 8px RGBA(0, 0, 0, 0.25);
   padding: 0.5rem;
   border: 1px solid #ccc;
   margin-top: 10px;
@@ -52,7 +65,7 @@
   margin-left: 10px;
   margin-right: 10px;
   color: #1a1c2c;
-  background-color: #94b0c2;
+  background-color: var(--text-white);
   flex: 9;
   text-align: center;
   font-size: 0.7rem;
@@ -76,10 +89,10 @@
   color: #f8f2e1;
 
   cursor: pointer;
-  background-color: #454857;
+  background-color: var(--container);
 
   border-radius: 5px;
-  box-shadow: 10px 10px 8px #468158;
+  box-shadow: 10px 10px 8px RGBA(0, 0, 0, 0.25);
 }
 
 #add-opt:hover {
@@ -102,7 +115,7 @@
   cursor: pointer;
   background-color: #454857;
   border-radius: 5px;
-  box-shadow: 10px 10px 8px #468158;
+  box-shadow: 10px 10px 8px RGBA(0, 0, 0, 0.25);
 }
 
 .correct {

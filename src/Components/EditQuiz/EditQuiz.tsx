@@ -200,6 +200,9 @@ export default function EditQuiz() {
       <button className="btn-quiz" onClick={() => saveQuiz()}>
         Edit Quiz
       </button>
+      <button className="btn-quiz" onClick={() => navigate("/home")}>
+        Cancel
+      </button>
     </div>
   );
 }

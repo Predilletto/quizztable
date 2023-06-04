@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { OptionProps } from "../Option";
 import CreateOption from "../CreateOption/CreateOption";
-import Question, { QuestionProps } from "../Question/Question";
+import { QuestionProps } from "../Question/Question";
 import "../CreateQuestion/CreateQuestion.css";
 
 interface Props {

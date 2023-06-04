@@ -1,17 +1,18 @@
 .header-app {
   font-family: "Press Start 2P", cursive;
-  background-color: #a7d074;
-  border-bottom: 6px solid #404b4f;
+  background-color: var(--dgreen);
+  border-bottom: 6px solid #03193f;
   padding: 1rem;
   margin-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #ebede9;
-  -webkit-text-stroke: 2.5px #394a50;
+  color: #ffffff;
+  -webkit-text-stroke: 1.5px #03193f;
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 50px;
+  max-height: 50px;
   flex: 1;
 }
 

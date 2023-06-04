@@ -179,6 +179,9 @@ export default function CreateQuiz() {
         {" "}
         Create Quiz{" "}
       </button>
+      <button className="btn-quiz" onClick={() => navigate("/home")}>
+        Cancel
+      </button>
     </div>
   );
 }

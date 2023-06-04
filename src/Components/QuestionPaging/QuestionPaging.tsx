@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { QuestionProps } from "../Question/Question";
 import { OptionProps } from "../Option";
 
 import "./QuestionPaging.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 interface QuestionPagingProps {
   questions: Array<QuestionProps>;
@@ -13,6 +14,7 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
   const [changeQuestion, setChangeQuestion] = useState(0);
   const [question, setQuestion] = useState<QuestionProps | null>(null);
   const [active, setActive] = useState("disabled");
+  const [countRight, setCountRight] = useState(0);
 
   const navigate = useNavigate();
 
@@ -26,7 +28,8 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
     if (changeQuestion < questions.length) {
       setQuestion(questions[changeQuestion]);
     } else if (questions.length > 0 && changeQuestion === questions.length) {
-      alert("it ended");
+      alert(`s Você acertou ${countRight} questões de ${questions.length}`);
+
       navigate("/home");
     }
   }, [changeQuestion, questions]);
@@ -41,6 +44,7 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
       if (option.correct) {
         setActive("active");
         setTimeout(() => {
+          setCountRight(countRight + 1);
           setActive("disabled");
           alert("correct :D");
           nextQuestion();

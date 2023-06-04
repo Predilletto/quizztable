@@ -16,7 +16,6 @@ export default function Matches() {
 
   const [userList, setUserList] = useState<QuizProps[]>([]);
   const [quizzes, setQuizzes] = useState<QuizProps[]>([]);
-  const [remove, setRemove] = useState(false);
   const [rmvId, setRmvId] = useState<string | undefined>("");
   const [showDialog, setShowDialog] = useState(false);
 
