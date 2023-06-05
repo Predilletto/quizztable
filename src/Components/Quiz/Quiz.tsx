@@ -43,8 +43,8 @@ function Quiz({ quiz, deleteQuiz, editQuiz, auth }: Props) {
             {" "}
             <img
               src="https://cdn0.iconfinder.com/data/icons/set-app-incredibles/24/Edit-01-32.png"
-              width={18}
-              height={18}
+              width={17}
+              height={15}
             />{" "}
           </button>
           <button className="remove-btn" onClick={() => deleteQuiz(quiz.id)}>
