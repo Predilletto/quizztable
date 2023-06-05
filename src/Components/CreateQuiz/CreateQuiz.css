@@ -130,7 +130,7 @@ h4 {
   color: #f8f2e1;
   width: auto;
   cursor: pointer;
-  background-color: #454857;
+  background-color: var(--container);
   border-radius: 5px;
   box-shadow: 10px 10px 8px RGBA(0, 0, 0, 0.25);
   max-width: 50px;
