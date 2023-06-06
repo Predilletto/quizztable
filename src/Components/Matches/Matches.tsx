@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getQuizzes, removeQuiz } from "../../utils/Storage";
 import { AuthContext } from "../../Contexts/AuthContext";
 import EditQuiz from "../EditQuiz/EditQuiz";
-import DialogBox from "../DialogBox/DialogBox";
+import RemoveBox from "../DialogBox/RemoveBox";
 
 export type DeleteQuizFunc = (id: string | undefined) => void;
 export type EditQuizFunc = (id: string | undefined) => void;
@@ -48,7 +48,7 @@ export default function Matches() {
 
   useEffect(() => {
     getQuizList();
-  }, []);
+  }, [user]);
 
   return (
     <div className="mtch-wrapper">
@@ -79,7 +79,7 @@ export default function Matches() {
           />
         ))}
       </ul>
-      <DialogBox
+      <RemoveBox
         isOpen={showDialog}
         onClose={closeDialog}
         onRemove={onRemove}

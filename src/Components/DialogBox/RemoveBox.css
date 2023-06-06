@@ -1,0 +1,45 @@
+.remove-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--dblue);
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.remove-overlay {
+  color: red;
+  font-size: bold;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-content {
+  text-align: center;
+}
+
+.remove-content p {
+  margin-bottom: 10px;
+}
+
+.remove-content button {
+  color: var(--text-white);
+  background-color: var(--container);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.remove-content button:hover {
+  color: var(--dblue);
+  background-color: #fff;
+}

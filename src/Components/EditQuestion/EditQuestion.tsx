@@ -3,6 +3,7 @@ import { OptionProps } from "../Option";
 import CreateOption from "../CreateOption/CreateOption";
 import { QuestionProps } from "../Question/Question";
 import "../CreateQuestion/CreateQuestion.css";
+import DialogBox from "../DialogBox/DialogBox";
 
 interface Props {
   question: QuestionProps;
@@ -18,19 +19,30 @@ export default function EditQuestion(props: Props) {
   const [title, setTitle] = useState(props.question.title);
   const [options, setOptions] = useState<OptionProps[]>(props.question.options);
   const [unique, setUnique] = useState(true);
+  const [showDialog, setShowDialog] = useState(false);
+  const [message, setMessage] = useState("");
+
+  function handleDialog(message: string) {
+    setMessage(message);
+    setShowDialog(true);
+  }
+
+  function handleClose() {
+    setShowDialog(false);
+  }
 
   function addOption(text: string, correct: boolean) {
     if (options.length > 4) {
-      alert("Apenas 5 opções válidas por questão!");
+      handleDialog("Apenas 5 opções válidas por questão!");
       return;
     }
 
     if (text.length < 1) {
-      alert("Opções vazias não podem ser adicionadas :(");
+      handleDialog("Opções vazias não podem ser adicionadas :(");
       return;
     }
     if (unique && correct) {
-      alert("Só uma resposta pode ser certa :D ");
+      handleDialog("Só uma resposta pode ser certa :D ");
       return;
     }
     if (correct) {
@@ -58,7 +70,7 @@ export default function EditQuestion(props: Props) {
 
   function handleEdit(title: string, options: Array<OptionProps>, idx: number) {
     if (title.length < 6) {
-      alert("A pergunta precisa ter pelo menos 6 caracteres");
+      handleDialog("A pergunta precisa ter pelo menos 6 caracteres");
       return;
     }
 
@@ -68,7 +80,7 @@ export default function EditQuestion(props: Props) {
       setOptions([]);
       setUnique(false);
     } else {
-      alert("É necessário uma Alternativa correta!");
+      handleDialog("É necessário uma Alternativa correta!");
     }
   }
 
@@ -76,6 +88,7 @@ export default function EditQuestion(props: Props) {
 
   return (
     <div className="qst-wrapper">
+      <DialogBox message={message} isOpen={showDialog} onClose={handleClose} />
       <h3>Titulo:</h3>
       <input value={title} onChange={(e) => setTitle(e.target.value)} />
       <CreateOption

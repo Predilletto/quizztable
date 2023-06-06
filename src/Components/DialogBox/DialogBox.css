@@ -1,0 +1,49 @@
+.alert-modal {
+  text-align: center;
+  position: fixed;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  transform: translate(-50%, -50%);
+  background-image: linear-gradient(180deg, var(--dblue), #657392);
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.alert-overlay {
+  color: #ff0040;
+  font-size: bold;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert-content {
+  text-align: center;
+}
+
+.alert-content p {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.alert-content button {
+  color: var(--text-white);
+  background-color: var(--container);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.alert-content button:hover {
+  color: var(--dblue);
+  background-color: #fff;
+}

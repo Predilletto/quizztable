@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./QuestionPaging.css";
 import { useNavigate } from "react-router-dom";
+import DialogBox from "../DialogBox/DialogBox";
 
 interface QuestionPagingProps {
   questions: Array<QuestionProps>;
@@ -16,6 +17,8 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
   const [question, setQuestion] = useState<QuestionProps | null>(null);
   const [active, setActive] = useState("disabled");
   const [countRight, setCountRight] = useState(0);
+  const [showDialog, setShowDialog] = useState(false);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,9 +32,10 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
     if (changeQuestion < questions.length) {
       setQuestion(questions[changeQuestion]);
     } else if (questions.length > 0 && changeQuestion === questions.length) {
-      alert(`s Você acertou ${countRight} questões de ${questions.length}`);
-
-      navigate("/home");
+      setMessage(
+        `Você acertou ${countRight} questões de ${questions.length} 	\u{1F44C} `
+      );
+      setShowDialog(true);
     }
   }, [changeQuestion, questions]);
 
@@ -40,11 +44,16 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
     setQuestion(questions[changeQuestion]);
   }
 
+  function handleClose() {
+    setShowDialog(false);
+    navigate("/home");
+  }
+
   function isCorrect(option: OptionProps) {
     if (questions.length > changeQuestion) {
       if (option.correct) {
         setActive("active");
-        toast.success("Correta resposta :D", {
+        toast.success("Correta resposta \u{1F600}", {
           position: "top-right",
           autoClose: 1000,
           hideProgressBar: true,
@@ -62,7 +71,7 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
         }, 1500);
       } else {
         setActive("active");
-        toast.error("Resposta errada :(", {
+        toast.error("Resposta errada \u{1F61E}", {
           position: "top-right",
           autoClose: 1000,
           hideProgressBar: true,
@@ -83,6 +92,7 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
 
   return (
     <div className="question-wrapper">
+      <DialogBox isOpen={showDialog} onClose={handleClose} message={message} />
       <ToastContainer />
       {question ? (
         <>

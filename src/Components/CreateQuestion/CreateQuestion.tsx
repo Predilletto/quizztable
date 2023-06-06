@@ -3,6 +3,7 @@ import { OptionProps } from "../Option";
 import CreateOption from "../CreateOption/CreateOption";
 import Question from "../Question/Question";
 import "./CreateQuestion.css";
+import DialogBox from "../DialogBox/DialogBox";
 
 interface Props {
   addQuestion: (title: string, options: Array<OptionProps>) => void;
@@ -11,19 +12,30 @@ function CreateQuestion(props: Props) {
   const [title, setTitle] = useState("");
   const [options, setOptions] = useState<OptionProps[]>([]);
   const [unique, setUnique] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  const [message, setMessage] = useState("");
+
+  function handleDialog(message: string) {
+    setMessage(message);
+    setShowDialog(true);
+  }
+
+  function handleClose() {
+    setShowDialog(false);
+  }
 
   function addOption(text: string, correct: boolean) {
     if (options.length > 4) {
-      alert("Apenas 5 opções válidas por questão!");
+      handleDialog("Apenas 5 opções válidas por questão!");
       return;
     }
 
     if (text.length < 1) {
-      alert("Opções vazias não podem ser adicionadas :(");
+      handleDialog("Opções vazias não podem ser adicionadas :(");
       return;
     }
     if (unique && correct) {
-      alert("Só uma resposta pode ser certa :D ");
+      handleDialog("Só uma resposta pode ser certa :D ");
       return;
     }
     if (correct) {
@@ -51,7 +63,7 @@ function CreateQuestion(props: Props) {
 
   function handleCreate(title: string, options: Array<OptionProps>) {
     if (title.length < 6) {
-      alert("A pergunta precisa ter pelo menos 6 caracteres");
+      handleDialog("A pergunta precisa ter pelo menos 6 caracteres");
       return;
     }
 
@@ -61,7 +73,7 @@ function CreateQuestion(props: Props) {
       setOptions([]);
       setUnique(false);
     } else {
-      alert("É necessário uma Alternativa correta!");
+      handleDialog("É necessário uma Alternativa correta!");
     }
   }
 
@@ -69,6 +81,7 @@ function CreateQuestion(props: Props) {
 
   return (
     <div className="qst-wrapper">
+      <DialogBox message={message} isOpen={showDialog} onClose={handleClose} />
       <h3>Titulo:</h3>
       <input value={title} onChange={(e) => setTitle(e.target.value)} />
       <CreateOption

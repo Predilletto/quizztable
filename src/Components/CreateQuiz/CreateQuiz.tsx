@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import "./CreateQuiz.css";
 import { AuthContext } from "../../Contexts/AuthContext";
 import EditQuestion from "../EditQuestion/EditQuestion";
+import DialogBox from "../DialogBox/DialogBox";
 
 export default function CreateQuiz() {
   const { user } = useContext(AuthContext);
@@ -22,11 +23,12 @@ export default function CreateQuiz() {
   });
   const [questions, setQuestions] = useState<QuestionProps[]>([]);
   const [showCreate, setShowCreate] = useState("");
-  const createQuestionRef = useRef<HTMLDivElement>(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const [message, setMessage] = useState("");
 
   async function createQuiz() {
     if (questions.length < 1) {
-      alert("Impossível criar um Quiz sem questões D: ");
+      handleDialog("Impossível criar um Quiz sem questões \u{1F6AB}");
       return;
     }
 
@@ -40,8 +42,17 @@ export default function CreateQuiz() {
       await addQuiz(quiz);
       navigate("/list-quiz");
     } else {
-      alert("Crie um assunto de pelo 5 caracteres");
+      handleDialog("Crie um assunto de pelo 5 caracteres");
     }
+  }
+
+  function handleDialog(message: string) {
+    setMessage(message);
+    setShowDialog(true);
+  }
+
+  function handleClose() {
+    setShowDialog(false);
   }
 
   function addQuestion(title: string, options: Array<OptionProps>) {
@@ -77,7 +88,7 @@ export default function CreateQuiz() {
 
   function deleteQuestions(idx: number) {
     if (showCreate === "edit") {
-      alert("Termine de editar antes de deletar algo");
+      handleDialog("Termine de editar antes de deletar algo");
       return;
     }
     const newQuestions = questions.filter((question) => question.idx !== idx);
@@ -109,6 +120,7 @@ export default function CreateQuiz() {
 
   return (
     <div className="quiz-container">
+      <DialogBox message={message} isOpen={showDialog} onClose={handleClose} />
       <h1>CRIE SEU QUIZ!</h1>
       <h2>Assunto: </h2>
       <input

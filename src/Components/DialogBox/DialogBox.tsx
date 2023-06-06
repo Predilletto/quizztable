@@ -1,28 +1,27 @@
 import React from "react";
 import Modal from "react-modal";
 
+import "./DialogBox.css";
+
 interface DialogBoxProps {
   isOpen: boolean;
   onClose: () => void;
-  onRemove: () => void;
+  message: string;
 }
 
-const DialogBox: React.FC<DialogBoxProps> = ({ isOpen, onClose, onRemove }) => {
+const DialogBox: React.FC<DialogBoxProps> = ({ isOpen, onClose, message }) => {
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      contentLabel="Confirmation"
+      contentLabel="Mensagem"
       className="alert-modal"
       overlayClassName="alert-overlay"
     >
-      <h2>Confirmation</h2>
-      <p>Are you sure you want to remove this quiz?</p>
+      <h2>Quizzing</h2>
+      <p>{message} </p>
       <div className="alert-content">
-        <button onClick={onClose}>Cancel</button>
-        <button className="remove-button" onClick={onRemove}>
-          Remove
-        </button>
+        <button onClick={onClose}>Ok</button>
       </div>
     </Modal>
   );

@@ -9,6 +9,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 import EditQuestion from "../EditQuestion/EditQuestion";
 
 import "../CreateQuiz/CreateQuiz.css";
+import DialogBox from "../DialogBox/DialogBox";
 
 export default function EditQuiz() {
   const { user } = useContext(AuthContext);
@@ -18,6 +19,8 @@ export default function EditQuiz() {
   const [questions, setQuestions] = useState<QuestionProps[]>([]);
   const [showCreate, setShowCreate] = useState("");
   const { id } = useParams() as { id: string };
+  const [showDialog, setShowDialog] = useState(false);
+  const [message, setMessage] = useState("");
   const [editableQuestion, setEditableQuestion] = useState<QuestionProps>({
     idx: -1,
     title: "",
@@ -40,9 +43,18 @@ export default function EditQuiz() {
     }
   }
 
+  function handleDialog(message: string) {
+    setMessage(message);
+    setShowDialog(true);
+  }
+
+  function handleClose() {
+    setShowDialog(false);
+  }
+
   async function saveQuiz() {
     if (questions.length < 1) {
-      alert("Impossível criar um Quiz sem questões D: ");
+      handleDialog("Impossível criar um Quiz sem questões D: ");
       return;
     }
 
@@ -55,10 +67,10 @@ export default function EditQuiz() {
         creatorUID: user?.uid,
       };
       await editQuiz(quiz);
-      alert("editado com sucesso!");
+      handleDialog("editado com sucesso!");
       navigate("/list-quiz");
     } else {
-      alert("Crie um assunto de pelo 5 caracteres");
+      handleDialog("Crie um assunto de pelo 5 caracteres");
     }
   }
 
@@ -88,7 +100,7 @@ export default function EditQuiz() {
 
   function deleteQuestions(idx: number) {
     if (showCreate === "edit") {
-      alert("Termine de editar antes de deletar algo");
+      handleDialog("Termine de editar antes de deletar algo");
       return;
     }
     const newQuestions = questions.filter((question) => question.idx !== idx);
@@ -131,6 +143,7 @@ export default function EditQuiz() {
 
   return (
     <div className="quiz-container">
+      <DialogBox message={message} isOpen={showDialog} onClose={handleClose} />
       <h1>EDIT SEU QUIZ</h1>
       <h2>Assunto: </h2>
       <input
