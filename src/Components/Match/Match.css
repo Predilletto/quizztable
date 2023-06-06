@@ -5,11 +5,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 5px solid red;
 }
 
 .mtch-container > h1 {
   text-align: center;
   flex: 1;
-  font-family: "8BIT WONDER", sans-serif;
+  font-family: "Press Start 2P", cursive;
 }

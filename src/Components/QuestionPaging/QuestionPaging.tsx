@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { QuestionProps } from "../Question/Question";
 import { OptionProps } from "../Option";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./QuestionPaging.css";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Contexts/AuthContext";
 
 interface QuestionPagingProps {
   questions: Array<QuestionProps>;
@@ -43,25 +44,46 @@ export default function QuestionPaging({ questions }: QuestionPagingProps) {
     if (questions.length > changeQuestion) {
       if (option.correct) {
         setActive("active");
+        toast.success("Correta resposta :D", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         setTimeout(() => {
           setCountRight(countRight + 1);
           setActive("disabled");
-          alert("correct :D");
+
           nextQuestion();
-        }, 500);
+        }, 1500);
       } else {
         setActive("active");
+        toast.error("Resposta errada :(", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         setTimeout(() => {
           setActive("disabled");
-          alert("failed :D");
+
           nextQuestion();
-        }, 500);
+        }, 1500);
       }
     }
   }
 
   return (
     <div className="question-wrapper">
+      <ToastContainer />
       {question ? (
         <>
           <h2>{question.title}</h2>
