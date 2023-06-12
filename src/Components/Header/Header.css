@@ -27,3 +27,20 @@
   text-align: center;
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  .header-app {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .header-app > h1 {
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .login-icon {
+    text-align: center;
+  }
+}
