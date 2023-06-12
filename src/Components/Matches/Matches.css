@@ -6,6 +6,7 @@
   box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.25);
   padding: 0;
   flex-grow: 8;
+  text-align: center;
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(180deg, #5ac54f, #2a2f4e);
@@ -23,6 +24,10 @@
   flex: 1;
 }
 
+.mtch-wrapper > h1:last-child {
+  margin-top: 20px;
+}
+
 .mtch-wrapper > ul {
   width: 100%;
   flex: 8;
@@ -31,6 +36,8 @@
   text-align: center;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .mtc-li {
@@ -39,6 +46,7 @@
   max-height: 30px;
   min-height: 30px;
   width: 90%;
+  margin: 5px;
   margin: 5px 5px;
   color: #1a1c2c;
   border-radius: 5px;
@@ -120,4 +128,23 @@
 
 .Fácil {
   background-image: linear-gradient(130deg, #95d891, #74bbad);
+}
+
+@media screen and (max-width: 500px) {
+  .mtch-wrapper > h1 {
+    font-size: 7vw;
+  }
+
+  .mtch-wrapper {
+    margin: 10px; /* Adjust margins for smaller screens */
+  }
+
+  .mtch-wrapper > ul {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+  }
+
+  .mtc-li {
+    max-width: 100%; /* Allow items to take full width on smaller screens */
+  }
 }
