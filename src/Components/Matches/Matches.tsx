@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Quiz, { QuizProps } from "../Quiz/Quiz";
 
 import "./Matches.css";
-import { useNavigate } from "react-router-dom";
 import { getQuizzes, removeQuiz } from "../../utils/Storage";
 import { AuthContext } from "../../Contexts/AuthContext";
 import EditQuiz from "../EditQuiz/EditQuiz";

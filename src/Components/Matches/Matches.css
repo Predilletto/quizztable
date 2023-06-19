@@ -41,6 +41,9 @@
 }
 
 .mtc-li {
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
   cursor: pointer;
   border: 3px solid #1a1c2c;
   max-height: 30px;
@@ -62,6 +65,8 @@
 }
 
 .sbj-li {
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: "Press Start 2P", cursive;
   font-weight: bold;
   color: var(--text-white);
